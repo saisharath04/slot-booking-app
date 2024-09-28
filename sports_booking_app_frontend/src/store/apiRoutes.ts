@@ -1,4 +1,4 @@
-export const route = "http://localhost:25088/api";
+export const route = "https://slot-booking-project-backend.onrender.com/api";
 
 export const loginApiRoute = `${route}/auth/login`;
 export const registerApiRoute = `${route}/auth/register`;

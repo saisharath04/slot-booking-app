@@ -2,7 +2,7 @@ import axios from "axios";
 import { JWT_TOKEN } from "./constants";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:25088/api",
+  baseURL: "https://slot-booking-project-backend.onrender.com/api",
 });
 
 axiosInstance.interceptors.request.use(
