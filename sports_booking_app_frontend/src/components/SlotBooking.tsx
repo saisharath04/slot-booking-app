@@ -73,7 +73,7 @@ const SlotBooking: React.FC = () => {
       message.error("Please enter a valid 10-digit phone number.");
       return;
     }
-    const user = getLoggedUserDetails();
+    const {user} = getLoggedUserDetails();
     await dispatch(
       CreateBookingAsyncThunk({
         booking_date: filters.booking_date,

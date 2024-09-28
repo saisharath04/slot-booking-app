@@ -26,9 +26,7 @@ const RenderMenu = ({
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const token = useMemo(() => localStorage.getItem(JWT_TOKEN), []);
-  const user = useMemo(() => getLoggedUserDetails(), []);
+  const {user,token} = getLoggedUserDetails();
 
   const isLogin = useMemo(() => token !== null, [token]);
   const getButtonText = useMemo(

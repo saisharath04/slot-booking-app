@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from "dayjs";
-import { USER_DETAILS } from "./constants";
+import { JWT_TOKEN, USER_DETAILS } from "./constants";
 import { userDetailsInitialValues } from "./store/initialData";
 import { UserType } from "./store/types";
 
@@ -8,12 +8,15 @@ export const validatePhoneNumber = (phone: string) => {
   return phoneRegex.test(phone);
 };
 
-export const getLoggedUserDetails: () => UserType = () => {
+export const getLoggedUserDetails: () => {
+  user: UserType;
+  token: string;
+} = () => {
+  const token = localStorage.getItem(JWT_TOKEN) ?? "";
   const userDetails = localStorage.getItem(USER_DETAILS);
   const user = userDetails ? JSON.parse(userDetails) : userDetailsInitialValues;
-  return user;
+  return { user, token };
 };
-
 
 const today = dayjs().startOf("day");
 

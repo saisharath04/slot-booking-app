@@ -2,7 +2,7 @@ import { Card, Col, Row } from "antd";
 import { getLoggedUserDetails } from "../helpers";
 
 const Profile = () => {
-  const user = getLoggedUserDetails();
+  const {user} = getLoggedUserDetails();
 
   return (
     <Card

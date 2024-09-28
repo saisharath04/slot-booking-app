@@ -18,7 +18,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootState } from "../store/store";
 import moment from "moment";
 import { timeSlots } from "../helpers";
-import { disablePastDates, getLoggedUserDetails, validatePhoneNumber } from "../helpers";
+import {
+  disablePastDates,
+  getLoggedUserDetails,
+  validatePhoneNumber,
+} from "../helpers";
 import {
   UpdateBookingAsyncThunk,
   ViewBookingsListAsyncThunk,
@@ -50,9 +54,10 @@ const UpdateBooking = ({
       message.error("Please enter a valid 10-digit phone number.");
       return;
     }
+    const { user } = getLoggedUserDetails();
     const payload: UpdateBookingPayloadType = {
       ...form,
-      user_id: getLoggedUserDetails()?.id,
+      user_id: user?.id,
     };
 
     await dispatch(UpdateBookingAsyncThunk(payload)).then(async (action) => {
@@ -102,7 +107,6 @@ const UpdateBooking = ({
       )),
     []
   );
-
 
   return (
     <Modal
