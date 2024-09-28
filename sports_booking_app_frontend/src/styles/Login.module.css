@@ -1,0 +1,93 @@
+.container {
+  margin: 0;
+  height: 92vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../images//login.jpeg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0 0, 200, 0.1);
+  filter: blur(10px);
+}
+
+.register_content {
+  z-index: 1;
+  border: 1px solid #5607bd;;
+  border-radius: 8px;
+  width: 30vw;
+  padding: 10px 24px;
+}
+
+.title_container {
+  display: flex;
+  align-items: center;
+  height: 20%;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 0px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #5607bd;;
+}
+
+.forget_password_button {
+  border: none;
+  color: #5607bd;
+  background: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+.input_field {
+  height: 48px;
+  font-size: 18px;
+  border-radius: 32px;
+}
+
+.confirm_button {
+  width: 100%;
+  height: 48px;
+  font-size: 20px;
+  border-radius: 32px;
+  color: white;
+  margin-top: 12px;
+  background-color: #5607bd;
+}
+
+.footer {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.footer_text {
+  font-size: 18px;
+  color: #5607bd;;
+}
+
+.footer_button {
+  border: none;
+  font-size: 18px;
+  background: none;
+  color: #5607bd;;
+  font-weight: bolder;
+}
+
