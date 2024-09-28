@@ -3,6 +3,7 @@
 /.env
 
 # testing
-/coverage
+/
+/dist
 
 # production
