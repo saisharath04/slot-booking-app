@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.dataContainer {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+}
