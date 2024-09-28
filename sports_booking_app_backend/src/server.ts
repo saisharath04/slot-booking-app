@@ -7,9 +7,23 @@ import slotBookingService from "./services/slotBookingService"
 dotenv.config();
 const app = express();
 
+const allowedOrigins = [
+  "https://slot-booking-app.netlify.app",
+  "http://localhost:3000",
+];
+
 app.use(
   cors({
-    origin: "*",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // If you're using cookies/authentication
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    allowedHeaders: "Content-Type,Authorization",
   })
 );
 app.use(bodyParser.json());

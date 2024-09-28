@@ -10,8 +10,22 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const slotBookingService_1 = __importDefault(require("./services/slotBookingService"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
+const allowedOrigins = [
+    "https://slot-booking-app.netlify.app",
+    "http://localhost:3000",
+];
 app.use((0, cors_1.default)({
-    origin: "*",
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true, // If you're using cookies/authentication
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    allowedHeaders: "Content-Type,Authorization",
 }));
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
