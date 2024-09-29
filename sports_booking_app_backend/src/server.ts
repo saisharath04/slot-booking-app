@@ -10,6 +10,7 @@ const app = express();
 const allowedOrigins = [
   "https://slot-booking-app.netlify.app",
   "http://localhost:3000",
+  "https://slot-booking-project-frontend.onrender.com",
 ];
 
 app.use(
