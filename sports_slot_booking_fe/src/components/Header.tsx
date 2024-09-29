@@ -31,7 +31,7 @@ const Header = () => {
   const isLogin = useMemo(() => token !== null, [token]);
   const getButtonText = useMemo(
     () => (isLogin ? user?.name : "Sign in / Sign up"),
-    [token, user]
+    [token, user,isLogin]
   );
 
   const handleMenuClick = useCallback(

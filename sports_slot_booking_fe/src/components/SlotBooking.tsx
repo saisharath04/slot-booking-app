@@ -1,34 +1,33 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
-import { BookingSlotFiltersType, SelectedSlotsTypes } from "../store/types";
 import {
   Button,
-  Modal,
-  Input,
-  message,
-  Typography,
-  Select,
-  DatePicker,
-  Row,
   Col,
+  DatePicker,
+  Input,
+  Modal,
+  Row,
+  Select,
   Spin,
+  Typography,
+  message,
 } from "antd";
-import ViewSlot from "./ViewSlot";
-import styles from "../styles/SlotBooking.module.css";
+import dayjs, { Dayjs } from "dayjs";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   disablePastDates,
   getLoggedUserDetails,
   validatePhoneNumber,
 } from "../helpers";
-import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootState } from "../store/store";
 import {
-  FacilitiesListAsyncThunk,
   CentersListAsyncThunk,
-  slotAvailabilityAsyncThunk,
   CreateBookingAsyncThunk,
+  FacilitiesListAsyncThunk,
+  slotAvailabilityAsyncThunk,
 } from "../store/thunk";
-import moment from "moment";
-import dayjs, { Dayjs } from "dayjs";
+import { BookingSlotFiltersType, SelectedSlotsTypes } from "../store/types";
+import styles from "../styles/SlotBooking.module.css";
+import ViewSlot from "./ViewSlot";
 
 const SlotBooking: React.FC = () => {
   const [selectedSlots, setSelectedSlots] = useState<SelectedSlotsTypes[]>([]);

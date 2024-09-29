@@ -11,7 +11,7 @@ import {
   Typography,
   message,
 } from "antd";
-import moment from "moment";
+import dayjs, { Dayjs } from "dayjs";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootState } from "../store/store";
@@ -28,7 +28,6 @@ import {
 } from "../store/types";
 import TableColumns from "./TableColumns";
 import UpdateBooking from "./UpdateBooking";
-import dayjs, { Dayjs } from "dayjs";
 
 const BookingHistory = () => {
   const [filters, setFilters] = useState<BookingHistoryFiltersType>({
@@ -76,7 +75,7 @@ const BookingHistory = () => {
   useEffect(() => {
     dispatch(CentersListAsyncThunk());
     dispatch(ViewBookingsListAsyncThunk());
-  }, []);
+  }, [dispatch]);
 
   const handleOkForDeleteModal = useCallback(async () => {
     if (selectedBooking?.id) {
@@ -96,7 +95,7 @@ const BookingHistory = () => {
     } else {
       message.error("Booking is not selected");
     }
-  }, [selectedBooking]);
+  }, [dispatch,selectedBooking]);
 
   const handleCancelForDeleteModal = useCallback(() => {
     setOpenDeleteModal(false);
@@ -131,7 +130,7 @@ const BookingHistory = () => {
         dispatch(FacilitiesListAsyncThunk({ id: value }));
       }
     },
-    [filters]
+    [filters, dispatch]
   );
 
   const dateChangeChandler = useCallback(
