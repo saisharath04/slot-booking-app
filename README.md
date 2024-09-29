@@ -5,8 +5,8 @@ This project implements a slot booking system for a sports company, with the fro
 
 ## Frontend Setup
 
-- **Website link**: [Slot Booking App](https://slot-booking-app.netlify.app/)
-- The frontend is deployed on Netlify.
+- **Website link**: [Slot Booking App](https://slot-booking-project-frontend.onrender.com/)
+- The front end is deployed on Render.
 
 ### Local Setup for Frontend
 
