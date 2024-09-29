@@ -77,7 +77,7 @@ const TableColumns: TableColumnsType = (
       title: "Actions",
       dataIndex: "id",
       render: (_: number, rowData: BookingEntityType) => {
-        const isPast = moment(`${rowData.booking_date}`).isBefore(moment());
+        const isPast = moment(rowData.booking_date).isBefore(moment(), "day");
         return (
           <>
             <Button
