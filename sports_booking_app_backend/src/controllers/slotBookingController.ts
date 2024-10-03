@@ -81,7 +81,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
       message: "email is required.",
     });
   }
-  if (!password) {
+  if (!password) { 
     return res.status(404).json({
       success: false,
       message: "password is required.",
@@ -302,17 +302,60 @@ export const createBookingApi = async (
         AND booking_date = ? 
         AND (start_time < ? AND end_time > ?)
       `;
+      const nearestSlotQuery = `select start_time, end_time from bookings where facility_id = ? and booking_date = ?`;
       const [conflictResults] = await connection.query(conflictCheckQuery, [
         facility_id,
         booking_date,
         end_time,
         start_time,
       ]);
+      const [bookedSlotsResults] = await connection.query(nearestSlotQuery,[facility_id,booking_date]);
+      console.log(
+        "bookedSLots",
+        bookedSlotsResults,
+        facilityCheckResults[0]
+      );
 
       if (conflictResults.length > 0) {
+        const bookingSlot = {
+          start_time,
+          end_time
+        }
+
+        const nearestTimeSlots = [];
+        let index = -1;
+        for(let i =0; i< availableSlots.length;i++){
+          if(availableSlots[i].start_time == bookingSlot.start_time && availableSlots[i].end_time === bookingSlot.end_time){
+            index = i
+          }
+        }
+
+        for(let i=index+1;i <availableSlots.length;i++){
+
+          const nextSlot = {
+            start_time : availableSlots[i].start_time,
+            end_time: availableSlots[i].end_time
+          }
+
+          let available: 'booked' | 'not booked' = 'not booked';
+          for(let j = 0; j < bookedSlotsResults.length; j++){
+            if(bookedSlotsResults[j].start_time === nextSlot.start_time && bookedSlotsResults[j].end_time === nextSlot.end_time){
+              available = "booked";
+            }
+          }
+           if (available === "not booked") {
+             nearestTimeSlots.push(nextSlot);
+             break
+           }
+        }
+
+       
+
+        console.log("indexOfBookedSlot", index);
         return res.status(409).send({
           success: false,
           message: `The time slot from ${start_time} to ${end_time} is already booked. Please choose a different slot.`,
+          available_slots: nearestTimeSlots,
         });
       }
 
